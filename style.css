@@ -1,0 +1,108 @@
+/* Light/Dark Mode Styles */
+body.light-mode {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --cell-bg: #ffffff;
+  --cell-border: #dee2e6;
+  --x-color: #dc3545;
+  --o-color: #007bff;
+}
+
+body.dark-mode {
+  --bg-color: #212529;
+  --text-color: #f8f9fa;
+  --cell-bg: #343a40;
+  --cell-border: #495057;
+  --x-color: #ff6b6b;
+  --o-color: #4dabf7;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* Player Status */
+.status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-status {
+  max-width: 250px;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Game Board Styles */
+.game-board {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 8px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: var(--cell-bg);
+  border: 2px solid var(--cell-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Player Marks */
+.x-mark {
+  color: var(--x-color);
+}
+
+.o-mark {
+  color: var(--o-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+  }
+  
+  .cell {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+  }
+  
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
