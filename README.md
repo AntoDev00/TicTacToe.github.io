@@ -55,7 +55,6 @@ Tris.github.io/
 ├── index.html
 ├── style.css
 └── README.md
-└── README.md      # Documentazione
 ```
 
 ## 📱 Come Giocare
