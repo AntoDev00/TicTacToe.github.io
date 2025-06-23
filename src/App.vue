@@ -5,15 +5,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import GameBoard from './components/GameBoard.vue';
-
-export default {
-  name: 'App',
-  components: {
-    GameBoard
-  }
-};
 </script>
 
 <style>

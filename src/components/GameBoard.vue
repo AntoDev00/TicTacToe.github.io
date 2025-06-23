@@ -21,78 +21,74 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue';
 import Cell from './Cell.vue';
 
-export default {
-  name: 'GameBoard',
-  components: { Cell },
-  data() {
-    return {
-      board: Array(9).fill(''),
-      currentPlayer: 'X',
-      gameOver: false,
-      winner: null,
-      winningCombinations: [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-      ]
-    };
-  },
-  computed: {
-    gameStatus() {
-      if (this.winner) {
-        return `Player ${this.winner} wins!`;
-      } else if (this.gameOver) {
-        return 'Game ended in a draw!';
-      } else {
-        return `Current player: ${this.currentPlayer}`;
-      }
-    },
-    statusClass() {
-      if (this.winner) {
-        return 'alert-success';
-      } else if (this.gameOver) {
-        return 'alert-warning';
-      } else {
-        return 'alert-info';
-      }
-    }
-  },
-  methods: {
-    makeMove(index) {
-      if (this.board[index] || this.gameOver) return;
-      this.board[index] = this.currentPlayer;
-      if (this.checkWinner()) {
-        this.winner = this.currentPlayer;
-        this.gameOver = true;
-        return;
-      }
-      if (!this.board.includes('')) {
-        this.gameOver = true;
-        return;
-      }
-      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
-    },
-    checkWinner() {
-      return this.winningCombinations.some(comb => {
-        const [a, b, c] = comb;
-        return (
-          this.board[a] &&
-          this.board[a] === this.board[b] &&
-          this.board[a] === this.board[c]
-        );
-      });
-    },
-    resetGame() {
-      this.board = Array(9).fill('');
-      this.currentPlayer = 'X';
-      this.gameOver = false;
-      this.winner = null;
-    }
+const board = ref(Array(9).fill(''));
+const currentPlayer = ref('X');
+const gameOver = ref(false);
+const winner = ref(null);
+const winningCombinations = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
+];
+
+const gameStatus = computed(() => {
+  if (winner.value) {
+    return `Player ${winner.value} wins!`;
+  } else if (gameOver.value) {
+    return 'Game ended in a draw!';
+  } else {
+    return `Current player: ${currentPlayer.value}`;
   }
-};
+});
+
+const statusClass = computed(() => {
+  if (winner.value) {
+    return 'alert-success';
+  } else if (gameOver.value) {
+    return 'alert-warning';
+  } else {
+    return 'alert-info';
+  }
+});
+
+function makeMove(index) {
+  if (board.value[index] || gameOver.value) {
+    return;
+  }
+  board.value[index] = currentPlayer.value;
+  if (checkWinner()) {
+    winner.value = currentPlayer.value;
+    gameOver.value = true;
+    return;
+  }
+  if (!board.value.includes('')) {
+    gameOver.value = true;
+    return;
+  }
+  currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
+}
+
+function checkWinner() {
+  return winningCombinations.some(combination => {
+    const [a, b, c] = combination;
+    return (
+      board.value[a] &&
+      board.value[a] === board.value[b] &&
+      board.value[a] === board.value[c]
+    );
+  });
+}
+
+function resetGame() {
+  board.value = Array(9).fill('');
+  currentPlayer.value = 'X';
+  gameOver.value = false;
+  winner.value = null;
+}
 </script>
 
 <style scoped>

@@ -8,29 +8,29 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Cell',
-  props: {
-    value: {
-      type: String,
-      default: ''
-    },
-    index: {
-      type: Number,
-      required: true
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+  value: {
+    type: String,
+    default: ''
   },
-  methods: {
-    handleClick() {
-      if (!this.value && !this.disabled) {
-        this.$emit('cell-click', this.index);
-      }
-    }
+  index: {
+    type: Number,
+    required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const emit = defineEmits(['cell-click']);
+
+function handleClick() {
+  if (!props.value && !props.disabled) {
+    emit('cell-click', props.index);
   }
 }
 </script>

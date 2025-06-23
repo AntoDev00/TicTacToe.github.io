@@ -40,13 +40,21 @@ Non sono necessari requisiti particolari, l'applicazione funziona direttamente n
    open index.html   # su macOS
    ```
 
-## 📁 Struttura del Progetto
+## Struttura del progetto
+
+Il progetto ora segue una struttura moderna, con tutto il codice sorgente all'interno della cartella `src`:
 
 ```
 Tris.github.io/
-├── index.html     # Struttura HTML principale
-├── style.css      # Stili CSS con temi light/dark
-├── app.js         # Logica di gioco con Vue.js
+├── src/
+│   ├── main.js         # Entry point
+│   ├── App.vue         # Root component
+│   └── components/
+│       ├── GameBoard.vue
+│       └── Cell.vue
+├── index.html
+├── style.css
+└── README.md
 └── README.md      # Documentazione
 ```
 
